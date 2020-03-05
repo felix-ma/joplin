@@ -1513,6 +1513,10 @@ class NoteTextComponent extends React.Component {
 		this.wrapSelectionWithStrings('*', '*', _('emphasized text'));
 	}
 
+	commandTextStrike() {
+		this.wrapSelectionWithStrings('~~', '~~', _('strikethrough text'));
+	}
+
 	commandDateTime() {
 		this.wrapSelectionWithStrings(time.formatMsToLocal(new Date().getTime()));
 	}
@@ -1568,6 +1572,13 @@ class NoteTextComponent extends React.Component {
 
 	commandTextHorizontalRule() {
 		this.addListItem('* * *');
+	}
+
+	commandTextTable() {
+		this.addListItem('\n'
+						+'| col1 | col2 | col3 |\n'
+						+'| ---- | ---- | ---- |\n'
+						+'|      |      |      |\n');
 	}
 
 	async commandTextLink() {
@@ -1666,6 +1677,14 @@ class NoteTextComponent extends React.Component {
 			});
 
 			toolbarItems.push({
+				tooltip: _('Strike'),
+				iconName: 'fa-strikethrough',
+				onClick: () => {
+					return this.commandTextStrike();
+				},
+			});
+
+			toolbarItems.push({
 				type: 'separator',
 			});
 
@@ -1695,6 +1714,14 @@ class NoteTextComponent extends React.Component {
 
 			toolbarItems.push({
 				type: 'separator',
+			});
+
+			toolbarItems.push({
+				tooltip: _('Table'),
+				iconName: 'fa-table',
+				onClick: () => {
+					return this.commandTextTable();
+				},
 			});
 
 			toolbarItems.push({
@@ -1747,7 +1774,7 @@ class NoteTextComponent extends React.Component {
 
 			toolbarItems.push({
 				tooltip: _('Format note'),
-				iconName: 'fa-th-large',
+				iconName: 'fa-align-right',
 				onClick: () => {
 					let note = Object.assign({}, this.state.note);
 					const prettifiedBody = prettier.format(note.body, {parser: 'markdown'});

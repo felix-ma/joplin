@@ -1,7 +1,7 @@
 {
   "name": "Joplin",
   "version": "1.0.189",
-  "description": "Joplin for Desktop",
+  "description": "Joplin for Felix",
   "main": "main.js",
   "scripts": {
     "dist": "node_modules/.bin/electron-builder",
@@ -13,7 +13,7 @@
     "type": "git",
     "url": "git+https://github.com/laurent22/joplin.git"
   },
-  "author": "Laurent Cozic",
+  "author": "Felix Ma",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/laurent22/joplin/issues"
